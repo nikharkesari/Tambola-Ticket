@@ -1,1 +1,83 @@
-<a href="ticket.html">Play</a>
+<html>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    canvas {
+        display: block;
+    }
+</style>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+
+<body>
+
+    <script>
+        function setup() {
+            let w =  windowWidth;
+            let h = windowHeight;
+            let l = h / 9
+            ticket();
+        }
+
+        function draw() {
+            noStroke();
+            fill(0, 0, 255, 200)
+            if (mouseIsPressed)
+                ellipse(mouseX, mouseY, windowHeight / 180);
+        }
+
+        function ticket() {
+            createCanvas(w, h)
+            background(255, 255, 220)
+            //printing lines
+            rotate(PI * 0.5)
+            translate(0, -width)
+            for (i = 0; i <= 10; i++) {
+                line(i * l, 0, i * l, width)
+            }
+            for (i = 0; i <= 4; i++) {
+                line(0, i * l, height, i * l)
+            }
+            //filling numbers
+            textAlign(CENTER);
+            textSize(l * 0.5)
+            r1 = numbers()
+            for (i = 0; i < 9; i++) {
+                text(r1[i], i * l + l / 2, l * 0.7)
+            }
+            r2 = numbers()
+            for (i = 0; i < 9; i++) {
+                text(r2[i], i * l + l / 2, 1.7 * l)
+            }
+            r3 = numbers()
+            for (i = 0; i < 9; i++) {
+                text(r3[i], i * l + l / 2, 2.7 * l)
+            }
+
+        }
+
+        function numbers() {
+            rule = [1, 1, 1, 1, 1, 0, 0, 0, 0]
+            rule = shuffle(rule)
+            a = []
+            for (i = 1; i < 90; i += 10) {
+                a.push(int(random(i, i + 9)))
+            }
+            for (i = 0; i < a.length; i++) {
+                if (rule[i] == 0) {
+                    a[i] = ''
+                }
+            }
+            return a
+        }
+
+    </script>
+</body>
+
+</html>
