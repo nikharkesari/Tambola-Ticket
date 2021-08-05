@@ -1,0 +1,67 @@
+<html>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    canvas {
+        display: block;
+    }
+</style>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+
+<body>
+
+    <script>
+        function setup() {
+            ticket(100)
+        }
+
+        function draw() {
+        }
+
+        function ticket(l) {
+            createCanvas(l * 9, l * 3);
+            background('white')
+            //printing lines
+            strokeWeight(2)
+            for (i = 0; i <= 10; i++) {
+                line(i * l, 0, i * l, height)
+            }
+            for (i = 0; i <= 4; i++) {
+                line(0, i * l, width, i * l)
+            }
+            //filling numbers
+            textAlign(CENTER);
+            textSize(l * 0.5)
+            r1 = numbers()
+            for (i = 0; i < 9; i++) {
+                text(r1[i], i * l + l / 2, l * 0.7)
+            }
+            r2 = numbers()
+            for (i = 0; i < 9; i++) {
+                text(r2[i], i * l + l / 2, 1.7 * l)
+            }
+            r3 = numbers()
+            for (i = 0; i < 9; i++) {
+                text(r3[i], i * l + l / 2, 2.7 * l)
+            }
+        }
+
+        function numbers() {
+            a = []
+            for (i = 1; i < 90; i += 10) {
+                a.push(int(random(i, i + 9)))
+            }
+            return a
+        }
+
+    </script>
+</body>
+
+</html>
