@@ -18,18 +18,23 @@
 <body>
 
     <script>
+        let l
         function setup() {
-            ticket(100)
+            l = windowWidth / 9
+            ticket(l);
         }
 
         function draw() {
+            noStroke();
+            fill(0, 0, 255, 200)
+            if (mouseIsPressed)
+                ellipse(mouseX, mouseY, l / 20);
         }
 
         function ticket(l) {
             createCanvas(l * 9, l * 3);
-            background('white')
+            background(255, 255, 220)
             //printing lines
-            strokeWeight(2)
             for (i = 0; i <= 10; i++) {
                 line(i * l, 0, i * l, height)
             }
@@ -51,12 +56,20 @@
             for (i = 0; i < 9; i++) {
                 text(r3[i], i * l + l / 2, 2.7 * l)
             }
+
         }
 
         function numbers() {
+            rule = [1, 1, 1, 1, 1, 0, 0, 0, 0]
+            rule = shuffle(rule)
             a = []
             for (i = 1; i < 90; i += 10) {
                 a.push(int(random(i, i + 9)))
+            }
+            for (i = 0; i < a.length; i++) {
+                if (rule[i] == 0) {
+                    a[i] = ''
+                }
             }
             return a
         }
