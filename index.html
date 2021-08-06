@@ -26,10 +26,10 @@
         }
 
         function draw() {
-            noStroke();
-            fill(0, 0, 255, 200)
-            //if (mouseIsPressed)
-                ellipse(mouseX, mouseY, windowHeight / 180);
+             noStroke();
+            fill(255, 0, 0, 5)
+            if (mouseIsPressed)
+                ellipse(mouseX, mouseY, windowHeight / 9);
         }
 
         function ticket(w, h, l) {
