@@ -22,7 +22,8 @@
             const w = windowWidth;
             const h = windowHeight;
             const l = h / 9
-            ticket(w, h, l);
+            print_ticket(w, h, l);
+            //console.log(get_ticket());
         }
 
         function draw() {
@@ -32,7 +33,7 @@
                 ellipse(mouseX, mouseY, windowHeight / 9);
         }
 
-        function ticket(w, h, l) {
+        function print_ticket(w, h, l) {
             createCanvas(w, h)
             background(255, 255, 220)
             //printing lines
@@ -47,38 +48,61 @@
             //filling numbers
             textAlign(CENTER);
             textSize(l * 0.5)
-            r1 = numbers()
-            for (i = 0; i < 9; i++) {
-                text(r1[i], i * l + l / 2, l * 0.7)
+            let ticket = get_ticket();
+            for (i = 0; i < 3; i++) {
+                for (j = 0; j < 9; j++) {
+                    text(ticket[i][j], j * l + l / 2, l * (i + 0.7))
+                }
             }
-            r2 = numbers()
-            for (i = 0; i < 9; i++) {
-                text(r2[i], i * l + l / 2, 1.7 * l)
+            for (j = 0; j < 9; j++) {
+                text(ticket[3][j], j * l + l / 2, l * 4)
             }
-            r3 = numbers()
-            for (i = 0; i < 9; i++) {
-                text(r3[i], i * l + l / 2, 2.7 * l)
-            }
-            r4 = 'By Nikhar'
-            for (i = 0; i < 9; i++) {
-                text(r4[i], i * l + l / 2, 4 * l)
-            }
-
         }
 
         function numbers() {
-            rule = [1, 1, 1, 1, 1, 0, 0, 0, 0]
-            rule = shuffle(rule)
             a = []
             for (i = 1; i < 90; i += 10) {
                 a.push(int(random(i, i + 9)))
             }
+
+            rule = [1, 1, 1, 1, 1, 0, 0, 0, 0]
+            rule = shuffle(rule)
             for (i = 0; i < a.length; i++) {
                 if (rule[i] == 0) {
                     a[i] = ''
                 }
             }
             return a
+        }
+
+        function get_ticket() {
+            let r1 = numbers()
+            let r2 = numbers()
+            let r3 = numbers()
+            let r4 = 'By Nikhar';
+            while (true) {
+                for (j = 0; j < 9; j++) {
+                    if (r1[j] != '') {
+                        if (r1[j] == r2[j]) {
+                            r2 = numbers();
+                            break;
+                        }
+                        else if (r1[j] == r3[j]) {
+                            r3 = numbers();
+                            break;
+                        }
+                    }
+                    if (r2[j] != '') {
+                        if (r2[j] == r3[j]) {
+                            r3 = numbers();
+                            break;
+                        }
+                    }
+                }
+                if (j == 9)
+                    break;
+            }
+            return [r1, r2, r3, r4];
         }
 
     </script>
